@@ -1,20 +1,14 @@
 class PostsController < ApplicationController
-  # skip_before_action :login_required, :only => [:index]
-
-  def new
-    check_for_user
-    @post = Post.new
-  end
 
   def create
     check_for_user
     @post = Post.create(post_params)
-    redirect_to posts_url
+    # redirect_to posts_url
   end
 
   def index
     check_for_user
-    @posts = Post.all
+    render json: Post.all
   end
 
   private

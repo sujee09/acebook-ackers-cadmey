@@ -42,6 +42,8 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
   gem 'travis'
+  gem 'webpacker'
+  gem 'react-rails'
 end
 
 group :development do

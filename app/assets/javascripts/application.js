@@ -12,3 +12,13 @@
 //
 //= require rails-ujs
 //= require_tree .
+
+console.log('Hello from the other side')
+
+document.getElementById("submit-button").addEventListener("click", function(){
+    showSomething();
+});
+
+function showSomething() {
+    console.log("Say Something")
+}

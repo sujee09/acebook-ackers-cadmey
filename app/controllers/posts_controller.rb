@@ -1,14 +1,22 @@
 class PostsController < ApplicationController
 
+  def new
+    check_for_user
+    @post = Post.new
+  end
+
+
   def create
     check_for_user
     @post = Post.create(post_params)
+    render json: @post, status: :created, location: @post
     # redirect_to posts_url
   end
 
   def index
     check_for_user
-    render json: Post.all
+    @posts = Post.all
+    render json: @posts
   end
 
   private

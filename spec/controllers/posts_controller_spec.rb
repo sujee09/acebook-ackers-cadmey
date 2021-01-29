@@ -16,8 +16,10 @@ RSpec.describe PostsController, type: :controller do
 
   describe "POST /" do
     it "responds with 200" do
-      expect(response).to redirect_to(posts_url)
-
+      expect(response).to have_http_status(:created)
+      expect(response.content_type).to eq('application/json')
+      expect(response.location).to eq(post_url(Post.last))
+      # look into this above
     end
 
     it "creates a post" do

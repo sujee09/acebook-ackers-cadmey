@@ -23,23 +23,23 @@ fetch('/posts_api')
 
   const e = React.createElement;
 
-  
+
   class LikeButton extends React.Component {
     constructor(props) {
       super(props);
-      this.state = { 
+      this.state = {
         loading: true,
-        liked: false, 
+        liked: false,
       };
       this.handleClick = this.handleClick.bind('this');
-      this.fetchLikeData()     
+      this.fetchLikeData()
     }
 
     fetchLikeData() {
       console.log(this.props)
       const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
       fetch("/likes/data", {
-        method: "POST", 
+        method: "POST",
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-Token': csrf
@@ -55,17 +55,17 @@ fetch('/posts_api')
       })
     }
     handleClick = () => {
-      this.setState(prevState => (prevState, { 
-        liked: !prevState.liked 
+      this.setState(prevState => (prevState, {
+        liked: !prevState.liked
       }));
-      this.sendLikeData() 
+      this.sendLikeData()
     }
-  
+
     render() {
       console.log(this.state)
       if (this.state.loading) {
         return ''
-      } 
+      }
       return e(
           'button',
           { onClick: () =>  this.handleClick() },
@@ -80,7 +80,7 @@ fetch('/posts_api')
         console.log(this.props)
         const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
         fetch("/likes/destroy", {
-          method: "POST", 
+          method: "POST",
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token': csrf
@@ -96,7 +96,7 @@ fetch('/posts_api')
         console.log(this.props)
         const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
         fetch("/likes/create", {
-          method: "POST", 
+          method: "POST",
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token': csrf
@@ -113,3 +113,48 @@ fetch('/posts_api')
 
 }
 
+class PostMessage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind('this');
+
+  }
+
+  handleClick = () => {
+    console.log('hello from handle click')
+    this.sendPost()
+  }
+
+  render() {
+    return e(
+
+        'button',
+        { onClick: () =>  this.handleClick() },
+        'Create Post'
+        );
+    }
+
+
+
+  sendPost() {
+      console.log('hello from send post')
+      const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+      fetch("/posts", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrf
+        },
+        body: JSON.stringify({ message: "Test"})
+      })
+      .then(response => {
+      console.log(response);
+      console.log(response.json());
+      console.log(JSON.stringify(response));
+      })
+
+  }
+}
+
+const postContainer = document.getElementById('abc')
+ReactDOM.render(e(PostMessage), postContainer)

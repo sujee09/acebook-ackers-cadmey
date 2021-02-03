@@ -7,9 +7,13 @@ class PostsController < ApplicationController
   end
 
   def create
+    p 'Hello from posts create'
     check_for_user
-    @post = Post.create(post_params)
-    redirect_to posts_url
+    permitted_params = post_params
+    permitted_params[:user_id] = session[:user]['id']
+    p permitted_params
+    @post = Post.create(permitted_params)
+    redirect_to :posts
   end
 
   def index

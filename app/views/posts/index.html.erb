@@ -1,12 +1,39 @@
+<html>
 <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-
-
+<div id="abc"></div>
 <div id="posts"></div>
 <div id='like-button'></div>
 <%= link_to new_post_path do %>
   New post
 <% end %>
 
-<%= javascript_include_tag 'interface' %>
+
+<script type="text/babel">
+  'use strict';
+
+const e = React.createElement;
+
+class PostBox extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+    console.log('hi'),
+    <form>
+      <input type='text' name='message' />
+      <input type='submit' name='submit' value='New Post' />
+      <input type='hidden' name='user_id' value='0' />
+    </form>
+    );
+  }
+}
+
+const domContainer = document.getElementById('abc');
+ReactDOM.render(e(PostBox), domContainer);
+</script>
+</html>

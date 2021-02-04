@@ -7,12 +7,15 @@
       <h1>Welcome to Acebook</h1>
     </div>
     <div id="logs">
-      <% if logged_in? %>
 
+      <% if logged_in? %>
+        <%= link_to "Home", posts_path %>
+        <%= link_to "#{session[:user]["name"]}", "/users/#{session[:user]["name"]}" %>
         <%= link_to "Log Out", session_path %>
       <% else %>
         <%= link_to "Log In", new_session_url %>
       <% end %>
+
     </div>
   </div>
   <div id="create-new-post"></div>

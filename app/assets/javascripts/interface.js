@@ -1,31 +1,36 @@
-console.log("I'm in the interface")
-function reloadPage() {
-fetch('/posts_api')
-  .then(response => response.json())
-  .then(data => {
+function renderPosts() {
+    fetch('/posts_api')
+      .then(response => response.json())
+      .then(data => {
 
-    let divPosts = document.getElementById("posts")
-    divPosts.innerHTML = ''
-    data.forEach(element => {
-        let div = document.createElement('div')
-        div.setAttribute('id', 'post')
-        let user = `<p>${element.user_name}</p><br>`
-        let message = `<p>${element.message}</p><br>`
-        let time = `<p>${element.created_at}</p><br>`
-        let like_button = document.createElement('div')
-        div.innerHTML = user + message + time
-        ReactDOM.render(e(LikeButton, {post_id: element.id}),  like_button);
-        div.appendChild(like_button)
-        divPosts.appendChild(div)
-    });
-  });
-}
+        let divPosts = document.getElementById("posts")
+        divPosts.innerHTML = ''
+        data.forEach(element => {
+            let div = document.createElement('div')
+            div.setAttribute('id', 'post')
+            let user = `<p>${element.user_name}</p><br>`
+            let message = `<p>${element.message}</p><br>`
+            let time = `<p>${element.created_at}</p><br>`
+            let likes = `<p>${element.number_of_likes}</p><br>`
+            let like_button = document.createElement('div')
+            div.innerHTML = user + message + time + likes
+            ReactDOM.render(e(LikeButton, {post_id: element.id}),  like_button);
+            div.appendChild(like_button)
+            divPosts.appendChild(div)
+        });
+      });
+    };
 
-reloadPage();
 
+renderPosts()
 
   const e = React.createElement;
 
+
+  class NumberOfLikes extends React.Component {
+
+  }
+  
 
   class LikeButton extends React.Component {
     constructor(props) {
@@ -87,6 +92,7 @@ reloadPage();
           body: JSON.stringify({ post_id: this.props.post_id})
         })
         .then(response => {
+        renderPosts()
       })
     } else {
         const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
@@ -99,9 +105,7 @@ reloadPage();
           body: JSON.stringify({ post_id: this.props.post_id})
         })
         .then(response => {
-        console.log(response);
-        // console.log(response.json());
-        // console.log(JSON.stringify(response));
+        renderPosts()
       })
     }
   }
@@ -121,14 +125,11 @@ class PostMessage extends React.Component {
       this.sendPost()
       document.getElementById('new-message-box').value = '';
       refreshMessageBox();
-      console.log('or me')
     }
-    console.log('am I being called')
-
+    
   }
 
   render() {
-    console.log('messagebox render')
     return [e(
             'textarea',
             { rows: '1', id: 'new-message-box', placeholder: "What's on your mind?"},
@@ -144,7 +145,6 @@ class PostMessage extends React.Component {
 
 
   sendPost() {
-      console.log('hello from send post')
       const messageText = document.getElementById('new-message-box').value
       const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
       fetch("/posts", {
@@ -156,27 +156,13 @@ class PostMessage extends React.Component {
         body: JSON.stringify({ message: messageText})
       })
       .then(response => {
-      console.log(response);
-      console.log(response.json());
-      console.log(JSON.stringify(response));
-      reloadPage();
+      renderPosts();
       })
 
   }
 }
 
-class TestComp extends React.Component {
-  render() {
-    return e(
-        'p',
-        null,
-        'test component'
-      )
-  }
-}
-
 function refreshMessageBox() {
-  console.log('refreeshing')
   const postContainer = document.getElementById('abc')
   ReactDOM.render(e(PostMessage), postContainer)
 }

@@ -46,27 +46,87 @@
   float: right;
 }
 
-.posts {
-  background-color: rgb(255, 255, 255);
+#posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.075);
 }
 
 #post {
-  margin: auto;
+  display: flex;
+  position: relative;
+  min-height: 200px;
+  margin: 10px;
   align-items: center;
   color: rgb(0, 0, 0);
   width: 30%;
   background-color: rgb(219, 221, 225);
-  border-radius: 30px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #17192b70;
+  transition-duration: 0.5s;
 }
 
-/* #name {
-  float: left;
+#user_name {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  font-size: 20px;
+  font-family: Helvetica, Helvetica, sans-serif;
+}
+
+#no_of_likes {
+  position: absolute;
+  right: 5%;
+  bottom: 0%;
+  font-size: 10px;
+  font-family: Helvetica, Helvetica, sans-serif;
+}
+
+#likeButton {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  font-size: 20px;
+  font-family: Helvetica, Helvetica, sans-serif;
+}
+
+#likeButton button {
+  position: absolute;
+  background-color: orange;
+  transform: rotate(-45deg);
+  right: 10%;
+  bottom: 10%;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+#likeButton button:hover {
+  position: absolute;
+  background-color: rgb(43, 255, 0);
+  transform: rotate(-45deg);
+  right: 10%;
+  bottom: 10%;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 #message {
-  float: center;
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  font-size: 20px;
+  font-family: Helvetica, Helvetica, sans-serif;
 }
 
 #time {
-  float: right;
+  position: absolute;
+  left: 80%;
+  top: 0%;
+  font-size: small;
+  font-style: italic;
+}
+/* #post:hover {
+  box-shadow: 10px 10px 5px #17192b70;
 } */

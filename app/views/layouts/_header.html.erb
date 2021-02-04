@@ -12,8 +12,6 @@
         <%= link_to "Home", posts_path %>
         <%= link_to "#{session[:user]["name"]}", "/users/#{session[:user]["name"]}" %>
         <%= link_to "Log Out", session_path %>
-      <% else %>
-        <%= link_to "Log In", new_session_url %>
       <% end %>
 
     </div>

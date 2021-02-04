@@ -1,4 +1,3 @@
-
 function renderPosts() {
     fetch('/posts_api')
       .then(response => response.json())
@@ -22,29 +21,32 @@ function renderPosts() {
       });
     };
 
+
 renderPosts()
 
   const e = React.createElement;
+
 
   class NumberOfLikes extends React.Component {
 
   }
   
+
   class LikeButton extends React.Component {
     constructor(props) {
       super(props);
-      this.state = { 
+      this.state = {
         loading: true,
-        liked: false, 
+        liked: false,
       };
       this.handleClick = this.handleClick.bind('this');
-      this.fetchLikeData()     
+      this.fetchLikeData()
     }
 
     fetchLikeData() {
       const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
       fetch("/likes/data", {
-        method: "POST", 
+        method: "POST",
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-Token': csrf
@@ -59,16 +61,16 @@ renderPosts()
       })
     }
     handleClick = () => {
-      this.setState(prevState => (prevState, { 
-        liked: !prevState.liked 
+      this.setState(prevState => (prevState, {
+        liked: !prevState.liked
       }));
-      this.sendLikeData() 
+      this.sendLikeData()
     }
-  
+
     render() {
       if (this.state.loading) {
         return ''
-      } 
+      }
       return e(
           'button',
           { onClick: () =>  this.handleClick() },
@@ -82,7 +84,7 @@ renderPosts()
       if (this.state.liked) {
         const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
         fetch("/likes/destroy", {
-          method: "POST", 
+          method: "POST",
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token': csrf
@@ -95,7 +97,7 @@ renderPosts()
     } else {
         const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
         fetch("/likes/create", {
-          method: "POST", 
+          method: "POST",
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token': csrf
@@ -110,3 +112,58 @@ renderPosts()
 
 }
 
+class PostMessage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind('this');
+
+  }
+
+  handleClick = () => {
+    const messageValue = document.getElementById('new-message-box').value
+    if (messageValue !== '') {
+      this.sendPost()
+      document.getElementById('new-message-box').value = '';
+      refreshMessageBox();
+    }
+    
+  }
+
+  render() {
+    return [e(
+            'textarea',
+            { rows: '1', id: 'new-message-box', placeholder: "What's on your mind?"},
+            null
+          ),
+          e(
+              'button',
+              { onClick: () =>  this.handleClick() },
+              'Create Post'
+            ),];
+    }
+
+
+
+  sendPost() {
+      const messageText = document.getElementById('new-message-box').value
+      const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+      fetch("/posts", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrf
+        },
+        body: JSON.stringify({ message: messageText})
+      })
+      .then(response => {
+      renderPosts();
+      })
+
+  }
+}
+
+function refreshMessageBox() {
+  const postContainer = document.getElementById('abc')
+  ReactDOM.render(e(PostMessage), postContainer)
+}
+refreshMessageBox();

@@ -1,3 +1,5 @@
+<div id="log_in_page">
+
 <h1> Sign in </h1>
 
 <%= form_for(:session, url: sessions_url, local: true) do |form| %>
@@ -5,12 +7,14 @@
   <div>
     <%= form.email_field :email, :size=>"50", placeholder: "Enter email here..." %>
   <div>
-
+  <br>
   <div>
     <%= form.password_field :password, :size=>"50", placeholder: "Password..." %>
   <div>
-
+  <br>
   <div>
     <%= form.submit "Sign In" %>
   </div>
 <% end %>
+
+</div>

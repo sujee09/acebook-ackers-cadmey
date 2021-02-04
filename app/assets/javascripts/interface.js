@@ -164,7 +164,7 @@ class PostMessage extends React.Component {
 }
 
 function refreshMessageBox() {
-  const postContainer = document.getElementById('abc')
+  const postContainer = document.getElementById('create-new-post')
   ReactDOM.render(e(PostMessage), postContainer)
 }
 refreshMessageBox();

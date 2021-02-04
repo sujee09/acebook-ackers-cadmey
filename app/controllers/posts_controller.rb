@@ -26,14 +26,16 @@ class PostsController < ApplicationController
     @posts_with_name_and_likes = @posts.each do |post| 
                        post[:user_name] = User.find(post["user_id"]).name 
                        post[:short_time] = post['created_at'].strftime('%H:%M - %d/%h')
-                       post[:number_of_likes] = Like.where(post_id: post["id"]).length
-                       p "hello im here"
-                       p post[:number_of_likes]
-                       
+                       post[:number_of_likes] = Like.where(post_id: post["id"]).length                    
     end
 
     render json: @posts_with_name_and_likes
 
+  end
+
+  def destroy
+    p "inside destroy"
+    Post.destroy(params['post_id'])
   end
 
   private

@@ -35,7 +35,8 @@ class PostsController < ApplicationController
 
   def destroy
     p "inside destroy"
-    Post.destroy(params['post_id'])
+    Like.where(post_id: params['post_id']).destroy_all
+    Post.destroy( params['post_id'])
   end
 
   private

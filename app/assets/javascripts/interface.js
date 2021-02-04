@@ -121,23 +121,30 @@ class PostMessage extends React.Component {
   }
 
   handleClick = () => {
-    console.log('hello from handle click')
+    console.log('above')
+    console.log(document.getElementById('new-message-box').value)
+    console.log('below')
     this.sendPost()
   }
 
   render() {
-    return e(
-
-        'button',
-        { onClick: () =>  this.handleClick() },
-        'Create Post'
-        );
+    return [e(
+            'textarea',
+            { rows: '1', id: 'new-message-box'},
+            'Create Post'
+          ),
+          e(
+              'button',
+              { onClick: () =>  this.handleClick() },
+              'Create Post'
+            ),];
     }
 
 
 
   sendPost() {
       console.log('hello from send post')
+      const messageText = document.getElementById('new-message-box').value
       const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
       fetch("/posts", {
         method: "POST",
@@ -145,7 +152,7 @@ class PostMessage extends React.Component {
           'Content-Type': 'application/json',
           'X-CSRF-Token': csrf
         },
-        body: JSON.stringify({ message: "Test"})
+        body: JSON.stringify({ message: messageText})
       })
       .then(response => {
       console.log(response);
@@ -153,6 +160,16 @@ class PostMessage extends React.Component {
       console.log(JSON.stringify(response));
       })
 
+  }
+}
+
+class TestComp extends React.Component {
+  render() {
+    return e(
+        'p',
+        null,
+        'test component'
+      )
   }
 }
 

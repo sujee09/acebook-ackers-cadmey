@@ -8,12 +8,13 @@ function renderPosts() {
         data.forEach(element => {
             let div = document.createElement('div')
             div.setAttribute('id', 'post')
-            let user = `<p>${element.user_name}</p><br>`
-            let message = `<p>${element.message}</p><br>`
-            let time = `<p>${element.created_at}</p><br>`
-            let likes = `<p>${element.number_of_likes}</p><br>`
+            let user = `<p id="user_name">${element.user_name}</p><br>`
+            let message = `<p id="message">${element.message}</p><br>`
+            let time = `<p id="time">${element.short_time}</p><br>`
+            let likes = `<p id="no_of_likes">Likes:${element.number_of_likes}</p><br>`
             let like_button = document.createElement('div')
-            div.innerHTML = user + message + time + likes
+            like_button.setAttribute('id', 'likeButton')
+            div.innerHTML = user + time + message + likes
             ReactDOM.render(e(LikeButton, {post_id: element.id}),  like_button);
             div.appendChild(like_button)
             divPosts.appendChild(div)

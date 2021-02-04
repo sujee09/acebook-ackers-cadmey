@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def posts_api
-    @posts = Post.where(user_id: session[:user]['id']).as_json()
+    @posts = Post.where(user_id: session[:user]['id']).order(created_at: :desc).as_json()
     @posts_with_name_and_likes = @posts.each do |post|
       post[:user_name] = User.find(post["user_id"]).name 
       post[:short_time] = post['created_at'].strftime('%H:%M - %d/%h')

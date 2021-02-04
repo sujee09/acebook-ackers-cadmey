@@ -27,12 +27,6 @@ renderPosts()
 
   const e = React.createElement;
 
-
-  class NumberOfLikes extends React.Component {
-
-  }
-  
-
   class LikeButton extends React.Component {
     constructor(props) {
       super(props);

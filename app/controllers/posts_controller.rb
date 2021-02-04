@@ -33,6 +33,11 @@ class PostsController < ApplicationController
 
   end
 
+  def destroy
+    p "inside destroy"
+    Post.destroy(params['post_id'])
+  end
+
   private
 
   def post_params

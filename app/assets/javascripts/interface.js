@@ -1,5 +1,5 @@
 console.log("I'm in the interface")
-
+function reloadPage() {
 fetch('/posts_api')
   .then(response => response.json())
   .then(data => {
@@ -19,6 +19,9 @@ fetch('/posts_api')
         divPosts.appendChild(div)
     });
   });
+}
+
+reloadPage();
 
 
   const e = React.createElement;
@@ -36,7 +39,6 @@ fetch('/posts_api')
     }
 
     fetchLikeData() {
-      console.log(this.props)
       const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
       fetch("/likes/data", {
         method: "POST",
@@ -51,7 +53,6 @@ fetch('/posts_api')
       })
       .then(data => {
         this.setState(data)
-        console.log(data)
       })
     }
     handleClick = () => {
@@ -62,7 +63,6 @@ fetch('/posts_api')
     }
 
     render() {
-      console.log(this.state)
       if (this.state.loading) {
         return ''
       }
@@ -77,7 +77,6 @@ fetch('/posts_api')
 
     sendLikeData() {
       if (this.state.liked) {
-        console.log(this.props)
         const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
         fetch("/likes/destroy", {
           method: "POST",
@@ -88,12 +87,8 @@ fetch('/posts_api')
           body: JSON.stringify({ post_id: this.props.post_id})
         })
         .then(response => {
-        console.log(response);
-        console.log(response.json());
-        console.log(JSON.stringify(response));
       })
     } else {
-        console.log(this.props)
         const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
         fetch("/likes/create", {
           method: "POST",
@@ -105,8 +100,8 @@ fetch('/posts_api')
         })
         .then(response => {
         console.log(response);
-        console.log(response.json());
-        console.log(JSON.stringify(response));
+        // console.log(response.json());
+        // console.log(JSON.stringify(response));
       })
     }
   }
@@ -121,17 +116,23 @@ class PostMessage extends React.Component {
   }
 
   handleClick = () => {
-    console.log('above')
-    console.log(document.getElementById('new-message-box').value)
-    console.log('below')
-    this.sendPost()
+    const messageValue = document.getElementById('new-message-box').value
+    if (messageValue !== '') {
+      this.sendPost()
+      document.getElementById('new-message-box').value = '';
+      refreshMessageBox();
+      console.log('or me')
+    }
+    console.log('am I being called')
+
   }
 
   render() {
+    console.log('messagebox render')
     return [e(
             'textarea',
-            { rows: '1', id: 'new-message-box'},
-            'Create Post'
+            { rows: '1', id: 'new-message-box', placeholder: "What's on your mind?"},
+            null
           ),
           e(
               'button',
@@ -158,6 +159,7 @@ class PostMessage extends React.Component {
       console.log(response);
       console.log(response.json());
       console.log(JSON.stringify(response));
+      reloadPage();
       })
 
   }
@@ -173,5 +175,9 @@ class TestComp extends React.Component {
   }
 }
 
-const postContainer = document.getElementById('abc')
-ReactDOM.render(e(PostMessage), postContainer)
+function refreshMessageBox() {
+  console.log('refreeshing')
+  const postContainer = document.getElementById('abc')
+  ReactDOM.render(e(PostMessage), postContainer)
+}
+refreshMessageBox();

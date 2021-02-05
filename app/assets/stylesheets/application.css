@@ -252,7 +252,7 @@
   font-family: Helvetica, Helvetica, sans-serif;
 }
 
-#deleteButton button {
+#deleteButton i {
   position: absolute;
   left: 5%;
   bottom: 10%;
@@ -262,7 +262,7 @@
   transition-duration: 0.5s;
 }
 
-#deleteButton button:hover {
+#deleteButton i:hover {
   background-color: rgba(238, 30, 23, 0.712);
   transform: scale(1.1);
   box-shadow: 5px 5px 5px #17192b70;

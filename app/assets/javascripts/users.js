@@ -65,7 +65,6 @@ class DeleteButton extends React.Component {
     }
 
 }
-<<<<<<< HEAD
 
 class PostMessage extends React.Component {
   constructor(props) {
@@ -122,5 +121,3 @@ function refreshMessageBox() {
   ReactDOM.render(e(PostMessage), postContainer)
 }
 refreshMessageBox();
-=======
->>>>>>> testing-touchup

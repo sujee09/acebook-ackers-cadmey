@@ -69,7 +69,7 @@ renderPosts()
       return e(
           'i',
           { onClick: () =>  this.handleClick()  },
-          this.state.liked ? e("span", {className: "fas fa-thumbs-up"}) : e("span", {className: "far fa-thumbs-up"})
+          this.state.liked ? e("span", {className: "fas fa-thumbs-up fa-lg"}) : e("span", {className: "far fa-thumbs-up fa-lg"})
           );
       }
 

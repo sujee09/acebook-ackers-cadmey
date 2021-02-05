@@ -67,9 +67,9 @@ renderPosts()
         return ''
       }
       return e(
-          'button',
-          { onClick: () =>  this.handleClick() },
-          this.state.liked ? 'Unlike' : 'Like'
+          'i',
+          { onClick: () =>  this.handleClick()  },
+          this.state.liked ? e("span", {className: "fas fa-thumbs-up"}) : e("span", {className: "far fa-thumbs-up"})
           );
       }
 
@@ -121,7 +121,7 @@ class PostMessage extends React.Component {
       document.getElementById('new-message-box').value = '';
       refreshMessageBox();
     }
-    
+
   }
 
   render() {

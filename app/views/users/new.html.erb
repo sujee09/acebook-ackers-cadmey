@@ -1,5 +1,7 @@
 
 <%= form_with(model: @user, local: true, class: "sign_up_form") do |form| %>
+
+  <h1>Sign Up Here</h1>
   <div class='user_name_enter'>
     <%= form.text_field :name, :size=>"50", placeholder: "Enter name here..."%>
     <% @user.errors.full_messages_for(:name).each do |message| %>
@@ -13,25 +15,25 @@
       <div><%= message %></div>
     <% end %>
   <div>
-<br>
+  <br>
   <div class='user_password_enter'>
     <%= form.password_field :password, :size=>"50", placeholder: "Enter your password here..." %>
     <% @user.errors.full_messages_for(:password).each do |message| %>
       <div><%= message %></div>
     <% end %>
   <div>
-<br>
+  <br>
    <div class='user_password_confirmation_enter'>
     <%= form.password_field :password_confirmation, :size=>"50", placeholder: "Please confirm your password..." %>
     <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
       <div><%= message %></div>
     <% end %>
   <div>
-<br>
+  <br>
   <div class='submit_button'>
     <%= form.submit%>
   </div>
-<br>
+  <br>
   <div class="">
     Already signed up? <%= link_to "Log In", new_session_url %>
   </div>

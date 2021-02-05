@@ -11,8 +11,7 @@ RSpec.describe "Timeline", type: :feature do
     fill_in 'user[password_confirmation]', with: "secret"
     click_button "Create User"
     visit "/posts"
-    click_link "New post"
-    fill_in "Message", with: "Hello, world!"
+    page.fill_in "new-message-box", with: "Hello, world!"
     click_button "Submit"
     expect(page).to have_content("Hello, world!")
   end

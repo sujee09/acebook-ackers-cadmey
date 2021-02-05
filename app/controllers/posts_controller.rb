@@ -27,7 +27,7 @@ class PostsController < ApplicationController
                        post[:number_of_likes] = Like.where(post_id: post["id"]).length
     end
 
-    render json: @posts_with_name_and_likes
+    render json: @posts_with_name_and_likes, status: :created
 
   end
 

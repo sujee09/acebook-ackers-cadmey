@@ -132,9 +132,10 @@ class PostMessage extends React.Component {
           ),
           e(
               'button',
-              { onClick: () =>  this.handleClick() },
-              'Create Post'
-            ),];
+              { onClick: () =>  this.handleClick() }, 
+              e("span", {className: "fa fa-paper-plane fa-lg"})
+            ),
+          ];
     }
 
 

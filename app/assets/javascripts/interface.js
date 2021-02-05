@@ -31,7 +31,7 @@ renderPosts()
   class NumberOfLikes extends React.Component {
 
   }
-  
+
 
   class LikeButton extends React.Component {
     constructor(props) {
@@ -127,13 +127,13 @@ class PostMessage extends React.Component {
       document.getElementById('new-message-box').value = '';
       refreshMessageBox();
     }
-    
+
   }
 
   render() {
     return [e(
             'textarea',
-            { rows: '1', id: 'new-message-box', placeholder: "What's on your mind?"},
+            { rows: '1', id: 'new-message-box', placeholder: "What's on your mind?", name: 'new-message-box'},
             null
           ),
           e(

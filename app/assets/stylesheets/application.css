@@ -185,6 +185,31 @@
   box-shadow: 5px 5px 5px #17192b70;
 }
 
+#deleteButton i {
+  position: absolute;
+  left: 8%;
+  bottom:5%;
+  font-size: 20px;
+  /* font-family: '', Times, serif; */
+  border-radius: 5px;
+  transition-duration: 0.5s;
+}
+
+#deleteButton i:hover {
+  /* background-color: rgba(47, 167, 39, 0.568); */
+  color: #ff6961;
+  transform: scale(1.5);
+  box-shadow: 5px 5px 5px #17192b70;
+}
+
+#deleteButton i:active {
+  /* background-color: rgba(47, 167, 39, 0.568); */
+  /* background-color: lightblue; */
+  transform: scale(2.0);
+  box-shadow: 5px 5px 5px #17192b70;
+}
+
+
 .fas {
   color: #3973ac;
 }

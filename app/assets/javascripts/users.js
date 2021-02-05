@@ -43,9 +43,9 @@ class DeleteButton extends React.Component {
 
     render() {
       return e(
-          'button',
+          'i',
           { onClick: () =>  this.handleClick() },
-          'Delete'
+          e("span", {className: "fas fa-trash-alt"})
           );
       }
 
@@ -80,7 +80,7 @@ class PostMessage extends React.Component {
       document.getElementById('new-message-box').value = '';
       refreshMessageBox();
     }
-    
+
   }
 
   render() {

@@ -11,20 +11,13 @@ class SessionsController < ApplicationController
       session[:user] = user
       redirect_to posts_url, :notice => "Welcome back, #{user.email}"
     else
-      flash.now.alert = "Invalid email or password"
-      render "new"
+      render :new
     end
   end
 
   def destroy
     session[:user] = nil
     redirect_to new_session_url
-  end
-
-  private
-
-  def login(user)
-    session[:user] = nil
   end
 
 end

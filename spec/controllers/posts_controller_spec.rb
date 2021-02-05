@@ -31,4 +31,13 @@ RSpec.describe PostsController, type: :controller do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  describe "Get #posts_api" do
+    it "return json object" do
+      session[:user] = User.create(name: "Will", email: "will@will.com", password: "hello12", password_confirmation: "hello12")
+      get :posts_api
+      expect(response).to have_http_status(:created)
+      expect(response.content_type).to eq('application/json')
+    end
+  end
 end

@@ -43,6 +43,7 @@ group :development, :test do
   gem 'simplecov-console', require: false
   gem 'travis'
   gem 'poltergeist'
+  gem 'rails-controller-testing'
 end
 
 group :development do

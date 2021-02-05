@@ -127,7 +127,7 @@ class PostMessage extends React.Component {
   render() {
     return [e(
             'textarea',
-            { rows: '1', id: 'new-message-box', placeholder: "What's on your mind?"},
+            { rows: '1', id: 'new-message-box', placeholder: "What's on your mind?", name: 'new-message-box'},
             null
           ),
           e(
@@ -135,7 +135,7 @@ class PostMessage extends React.Component {
           ),
           e(
               'button',
-              { onClick: () =>  this.handleClick() }, 
+              { onClick: () =>  this.handleClick() },
               e("span", {className: "fa fa-paper-plane fa-lg"})
             ),
           ];

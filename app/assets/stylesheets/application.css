@@ -14,6 +14,18 @@
  *= require_self
  */
 
+ form.sign_up_form {
+  align-items: center;
+  padding-top: 150px;
+  height: 1000px;
+  width: 100%;
+  margin: auto;
+  background-image: linear-gradient(80deg, #98acd498, rgba(70, 123, 230, 0.624)), url("w-4.png");
+  background-size: 100% 100%;
+  /* background-color:#b63e1a6c; */
+  border-radius: 20px;
+}
+
 
  #log_in_page {
   min-height: 3000px;
@@ -108,6 +120,7 @@
 }
 
 #post {
+  animation: postsFade ease 1s;
   display: flex;
   position: relative;
   min-height: 200px;
@@ -115,7 +128,7 @@
   align-items: center;
   color: rgb(0, 0, 0);
   width: 30%;
-  background-color: rgba(151, 176, 226, 0.651);
+  background-image: radial-gradient( #bcccec 20%, #7fa5f1);
   border-radius: 10px;
   box-shadow: 5px 5px 5px #17192b70;
   transition-duration: 0.5s;
@@ -124,8 +137,9 @@
 #user_name {
   position: absolute;
   left: 5%;
-  top: 5%;
-  font-size: 20px;
+  top: 0%;
+  font-size: 1em;
+  font-weight: bold;
   font-family: Helvetica, Helvetica, sans-serif;
 }
 
@@ -164,7 +178,7 @@
   width: 50%;
   left: 25%;
   top: 25%;
-  font-size: 20px;
+  font-size: 1em;
   font-family: Helvetica, Helvetica, sans-serif;
 }
 
@@ -224,7 +238,14 @@
 }
 
 #deleteButton button:hover {
-  background-color: rgba(121, 33, 30, 0.829);
+  background-color: rgba(238, 30, 23, 0.712);
   transform: scale(1.1);
   box-shadow: 5px 5px 5px #17192b70;
+}
+
+@keyframes postsFade {
+  0% {opacity:0;
+      transform: scale(0);}
+  100% {opacity:1;
+    transform: scale(1);}
 }

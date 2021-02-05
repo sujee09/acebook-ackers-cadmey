@@ -22,14 +22,7 @@
   background-size: auto;
 }
 
-.sign_up_form {
-  align-items: center;
-  height: 300px;
-  width: 50%;
-  margin: auto;
-  background-color:#1d2d4d6c;
-  border-radius: 20px;
-}
+
 
 
 .user_name_enter.input {

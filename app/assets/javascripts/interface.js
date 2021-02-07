@@ -131,6 +131,9 @@ class PostMessage extends React.Component {
             null
           ),
           e(
+            'br',
+          ),
+          e(
               'button',
               { onClick: () =>  this.handleClick() },
               e("span", {className: "fa fa-paper-plane fa-lg"})

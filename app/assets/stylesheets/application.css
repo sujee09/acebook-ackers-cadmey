@@ -22,10 +22,8 @@
   margin: auto;
   background-image: linear-gradient(80deg, #98acd498, rgba(70, 123, 230, 0.624)), url("http://pngimg.com/uploads/world_map/world_map_PNG34.png");
   background-size: 100% 100%;
-  /* background-color:#b63e1a6c; */
   border-radius: 20px;
 }
-
 
  #log_in_page {
   padding-top: 100px;
@@ -36,11 +34,25 @@
  }
 
  input {
+  color: white;
+  border: 0;
+  background: transparent;
+  border-bottom: 2px solid gray;
   border-radius: 5px;
  }
+
+ ::placeholder {
+  color: white;
+ }
+
+ input:focus {
+  color: white;
+  background: transparent;
+  border-bottom: 2px solid gray;
+ }
+
  #total_header {
-   display: block;
-  /* position: fixed; */
+  display: block;
   background-image: linear-gradient(40deg, #21345a, #12213f, #4267B2, #4267B2);
   border-radius: 10px;
   width: 100%;
@@ -66,7 +78,6 @@
 }
 
  #title {
-  /* background-image: linear-gradient(40deg, #21345a, #12213f, #4267B2, #4267B2); */
    margin-right: 30%;
    margin-left: 30%;
   text-align: center;
@@ -82,7 +93,6 @@
  body {
    color: white;
    text-align: center;
-   /* background-image: linear-gradient(40deg, #21345a, #12213f, #4267B2, #4267B2); */
    background-size: auto;
  }
 
@@ -233,11 +243,19 @@
 
 #create-new-post textarea {
   display: flex;
-  background-color: rgb(255, 255, 255);
+  border: 0;
+  background: transparent;
+  border-bottom: 2px solid gray;
   min-height: 30px;
   min-width: 500px;
   align-items: center;
   border-radius: 5px;
+}
+
+#create-new-post textarea:focus {
+  color: white;
+  background: transparent;
+  border-bottom: 2px solid gray;
 }
 
 #create-new-post button {

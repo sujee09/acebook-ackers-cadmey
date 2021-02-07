@@ -12,7 +12,7 @@ CI/CD on Travis:
 Deployed on heroku: https://acebook-akers-cademy.herokuapp.com/
 
 ## Screenshots
-Include logo/demo screenshot etc.
+![posts page](https://github.com/sujee09/acebook-akers-cademy/blob/master/screenshots/Screenshot%202021-02-07%20at%2017.30.33.png)
 
 ## Tech/framework used
 Ruby on Rails server side and React client side, with Rspec and Capybara testing suite.

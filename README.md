@@ -2,57 +2,97 @@
 A small facebook clone.
 
 ## Motivation
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+A group project introduce Rails and React frameworks, to build a split backend/frontend project with a single page application driven by APIs.
 
 ## Build status
-Build status of continuous integration i.e. travis, appveyor etc. Ex. -
+CI/CD on Travis:
 
 [![Build Status](https://travis-ci.com/sujee09/acebook-akers-cademy.svg?branch=master)](https://travis-ci.com/sujee09/acebook-akers-cademy)
 
-
-## Code style
-If you're using any code style like xo, standard etc. That will help others while contributing to your project. Ex. -
-
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+Deployed on heroku: https://acebook-akers-cademy.herokuapp.com/
 
 ## Screenshots
 Include logo/demo screenshot etc.
 
 ## Tech/framework used
-Ex. -
-
-<b>Built with</b>
-- [Electron](https://electron.atom.io)
+Ruby on Rails server side and React client side, with Rspec and Capybara testing suite.
 
 ## Features
-What makes your project stand out?
+Add posts, delete posts. Like and unlike.
 
 ## Code Example
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+```Ruby
+class PostsController < ApplicationController
+  # skip_before_action :login_required, :only => [:index]
+
+  def new
+    check_for_user
+    @post = Post.new
+  end
+
+  def create
+    check_for_user
+    permitted_params = post_params
+    permitted_params[:user_id] = session[:user]['id']
+    @post = Post.create(permitted_params)
+    redirect_to :posts
+  end
+
+  def index
+    check_for_user
+    @posts = Post.all.order(created_at: :desc)
+  end
+
+  def posts_api
+    @posts = Post.all.order(created_at: :desc).as_json()
+    @posts_with_name_and_likes = @posts.each do |post|
+                       post[:user_name] = User.find(post["user_id"]).name
+                       post[:short_time] = post['created_at'].strftime('%H:%M - %d/%h')
+                       post[:number_of_likes] = Like.where(post_id: post["id"]).length
+    end
+
+    render json: @posts_with_name_and_likes, status: :created
+
+  end
+
+  def destroy
+    Like.where(post_id: params['post_id']).destroy_all
+    Post.destroy( params['post_id'])
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:message, :user_id)
+  end
+
+  def check_for_user
+    if session[:user] === nil
+      redirect_to new_user_url
+    end
+  end
+end
+```
 
 ## Installation
-Provide step by step series of examples and explanations about how to get a development env running.
+1. Fork and Clone Repo.
+2. Ensure you have Rails installed
+3. `$ bundle install`
+4. `$ bin/rails db:create`
+5. `$ bin/rails db:migrate`
 
 ## API Reference
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+* Posts posts_api route servers up JSON with all posts data
+* User posts_api route serves up JSON with just the users posts data
 
 ## Tests
-Describe and show how to run the tests with code examples.
+Test can be run with `$ rspec`. 26 examples, 0 failires, 8 pending. 95% coverage.
 
 ## How to use?
-If people like your project they’ll want to learn how they can use it. To do so include step by step guide to use your project.
+Deployed at: https://acebook-akers-cademy.herokuapp.com/
 
-## Contribute
+Or, to run locally:
 
-Let people know how they can contribute into your project. A [contributing guideline](https://github.com/zulip/zulip-electron/blob/master/CONTRIBUTING.md) will be a big plus.
-
-## Credits
-Give proper credits. This could be a link to any repo which inspired you to build this project, any blogposts or links to people who contrbuted in this project.
-
-#### Anything else that seems useful
-
-## License
-A short snippet describing the license (MIT, Apache etc)
-
-MIT © [Yourname]()
+1. `$ bin/rails server`
+2. Navigate to localhost:3000 in the browser.
